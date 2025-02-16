@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/senbagavalli04/blood_donation.git'
+                git 'https://github.com/senbagavalli04/blood_app_jenkins.git'
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
                 sh '''
                 source $VENV/bin/activate
                 python manage.py migrate
-                python manage.py runserver 0.0.0.0:8000 &
+                python manage.py runserver 0.0.0.0:8080 &
                 '''
             }
         }
@@ -44,13 +44,13 @@ pipeline {
 
     post {
         success {
-            echo '✅ Deployment Successful!'
-            mail to: 'your-email@example.com',
+            echo ' Deployment Successful!'
+            mail to: 'senbagavallin30@gmail.com',
                  subject: 'Jenkins Build Successful',
                  body: 'Your Blood Donation App has been deployed successfully!'
         }
         failure {
-            echo '❌ Build Failed!'
+            echo ' Build Failed!'
         }
     }
 }
